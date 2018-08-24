@@ -12,13 +12,17 @@ import java.awt.event.ActionListener;
  */
 public class WindowMain extends JFrame {
 
+
     public WindowMain() throws HeadlessException {
+
 
         add(setBackground(), BorderLayout.CENTER);
 
-        setBounds(500,200,250,300);
+        setBounds(500,200,400,300);
         setTitle("Социометрия");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        newBittonBase();
 
         newButtonStart();
 
@@ -34,6 +38,20 @@ public class WindowMain extends JFrame {
             }
         });
         add(start, BorderLayout.SOUTH);
+        start.requestFocus();
+    }
+
+    private void newBittonBase(){
+        JPanel panel = new JPanel(new GridLayout(4,1));
+        JButton create = new JButton("Создать базу");
+        panel.add(create);
+        JButton look = new JButton("Посмотреть базу");
+        panel.add(look);
+        JButton change = new JButton("Изменить базу");
+        panel.add(change);
+        JButton delete = new JButton("Удалить базу");
+        panel.add(delete);
+        add(panel, BorderLayout.EAST);
     }
 
     private ImagePanel setBackground(){

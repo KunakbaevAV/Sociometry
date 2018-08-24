@@ -14,22 +14,33 @@ import java.util.Arrays;
 /**
  * @autor Kunakbaev Artem
  */
-public class WindowArray extends JFrame {
+class WindowArray extends JFrame {
     private Sociometry sociometry;
     private Group group;
     private JTextArea textArea;
+    static WindowAllRespondents war;
+    static WindowArray windowArray;
 
-    public static void main(String[] args) {
-        new WindowArray();
-    }
+    private String probe = "Пробная группа\n" +
+            "Первый респондент\n" +
+            "Второй респондент\n" +
+            "Третий респондент\n" +
+            "Четвертый респондент\n" +
+            "Пятый респондент\n" +
+            "Шестой респондент\n" +
+            "Седьмой респондент";
 
-    public WindowArray() throws HeadlessException {
+    WindowArray() throws HeadlessException {
+
+
 
         setBounds(500,100,400,600);
         setTitle("Введите список группы");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         newPanel();
+
+        textArea.setText(probe);
 
         newButtons();
 
@@ -60,6 +71,11 @@ public class WindowArray extends JFrame {
                 for (int i = 1; i < names.length; i++) {
                     if(!names[i].equals("")) group.addRespondent(new Respondent(names[i]));
                 }
+
+                war = new WindowAllRespondents(group);
+                war.setVisible(true);
+
+                setVisible(false);
             }
         });
 
@@ -67,11 +83,6 @@ public class WindowArray extends JFrame {
         cancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                System.out.println(group.getNameGroup());
-                System.out.println("");
-                for (int i = 0; i < group.getGroupSize(); i++) {
-                    System.out.println(group.getRespondent(i).getName());
-                }
             }
         });
 
@@ -79,5 +90,4 @@ public class WindowArray extends JFrame {
         panel.add(ok);
         add(panel, BorderLayout.SOUTH);
     }
-
 }
