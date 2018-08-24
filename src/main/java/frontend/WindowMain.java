@@ -1,5 +1,7 @@
 package frontend;
 
+import backend.DataBase;
+import backend.MyConnection;
 import backend.Sociometry;
 
 import javax.swing.*;
@@ -11,10 +13,11 @@ import java.awt.event.ActionListener;
  * @autor Kunakbaev Artem
  */
 public class WindowMain extends JFrame {
-
+    private static DataBase dataBase;
 
     public WindowMain() throws HeadlessException {
 
+        dataBase = new DataBase();
 
         add(setBackground(), BorderLayout.CENTER);
 
@@ -44,12 +47,34 @@ public class WindowMain extends JFrame {
     private void newBittonBase(){
         JPanel panel = new JPanel(new GridLayout(4,1));
         JButton create = new JButton("Создать базу");
+        create.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dataBase.createTable();
+            }
+        });
         panel.add(create);
-        JButton look = new JButton("Посмотреть базу");
-        panel.add(look);
-        JButton change = new JButton("Изменить базу");
-        panel.add(change);
+        JButton newRow = new JButton("Добавить строку");
+        newRow.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dataBase.addRow("Проверка");
+            }
+        });
+        panel.add(newRow);
+        JButton showAll = new JButton("Показать все");
+        showAll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dataBase.readAll();
+            }
+        });
+        panel.add(showAll);
         JButton delete = new JButton("Удалить базу");
+        delete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dataBase.deleteTable();
+            }
+        });
         panel.add(delete);
         add(panel, BorderLayout.EAST);
     }

@@ -8,13 +8,28 @@ import java.util.List;
  */
 public class Respondent {
     private String name;
+    private String groupName;
+    private String motiv;
+    private String timeResearch;
+    private String likes;
+    private String dislikes;
+
     private List<Respondent> like;
     private List<Respondent> dislike;
 
     public Respondent(String name) {
         this.name = name;
-        like = new ArrayList<Respondent>();
-        dislike = new ArrayList<Respondent>();
+        like = new ArrayList<>();
+        dislike = new ArrayList<>();
+    }
+
+    Respondent(String timeResearch,String groupName, String name,  String motiv,  String likes, String dislikes) {
+        this.name = name;
+        this.groupName = groupName;
+        this.motiv = motiv;
+        this.timeResearch = timeResearch;
+        this.likes = likes;
+        this.dislikes = dislikes;
     }
 
     public void setLike(Respondent r) {
